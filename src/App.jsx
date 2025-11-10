@@ -94,6 +94,7 @@ function App() {
           </a>
           <div className="hidden md:flex items-center gap-6 text-sm">
             <a href="#program" className="hover:text-blue-700">Program</a>
+            <a href="#curriculum" className="hover:text-blue-700">Curriculum</a>
             <a href="#admissions" className="hover:text-blue-700">Admissions</a>
             <a href="#fees" className="hover:text-blue-700">Fees</a>
             <a href="#testimonials" className="hover:text-blue-700">Outcomes</a>
@@ -221,7 +222,7 @@ function App() {
               ))}
             </div>
 
-            {/* Right: Visual + timeline */}
+            {/* Right: Visual */}
             <div>
               <div className="relative rounded-2xl overflow-hidden shadow border bg-white/50 backdrop-blur">
                 <img
@@ -235,28 +236,6 @@ function App() {
                   }}
                 />
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white text-sm">Hands-on product studios, every term.</div>
-              </div>
-
-              {/* Timeline */}
-              <div className="mt-8">
-                <h3 className="text-xl font-semibold">1.5 Years of Industry Experience</h3>
-                <p className="text-gray-600 mt-2 max-w-4xl">
-                  Internships and co-op style experiences begin in Year 2. Students rotate through staged experiences—Assistant Developer (6 months), Applied AI Engineer (6 months), and Product/Cloud Specialist (6 months)—totaling 18 months of on-the-job learning.
-                </p>
-                <div className="mt-6 grid md:grid-cols-4 gap-4">
-                  {[
-                    { y: 'Year 1', t: 'Foundations', d: 'Math, Programming, DSA, Systems thinking, Practical labs' },
-                    { y: 'Year 2', t: 'Systems & Data', d: 'OS, Networks, DB, DevOps; Internship Stage 1 (6 months)' },
-                    { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds; Internship Stage 2 (6 months)' },
-                    { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone; Internship Stage 3 (6 months)' },
-                  ].map((s, idx) => (
-                    <div key={s.y} className={`rounded-xl p-5 border ${idx>0 ? 'bg-white/60 border-white/30 backdrop-blur' : 'bg-white/90'} shadow-sm`}>
-                      <p className="text-xs tracking-wide text-gray-500">{s.y}</p>
-                      <p className="font-semibold">{s.t}</p>
-                      <p className="text-sm text-gray-600 mt-2">{s.d}</p>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
@@ -278,6 +257,88 @@ function App() {
                   <p className="text-sm text-gray-600 mt-2">Mentors with strong research and industry pedigree.</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4-Year B.Tech Curriculum (moved and redesigned timeline with 1.5 years of industry experience) */}
+      <section id="curriculum" className="relative">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50/60 via-white to-blue-50/40" />
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="text-center">
+            <h2 className="section-title">4-Year B.Tech Curriculum</h2>
+            <p className="text-gray-600 mt-2 max-w-3xl mx-auto">A clear, outcome-driven roadmap from solid CS foundations to advanced AI and product engineering—punctuated with real industry experience.</p>
+          </div>
+
+          {/* Horizontal roadmap */}
+          <div className="mt-10">
+            <div className="hidden md:grid grid-cols-4 gap-4">
+              {[
+                { y: 'Year 1', t: 'Foundations', d: 'Math, Programming, DSA, Systems thinking, Practical labs' },
+                { y: 'Year 2', t: 'Systems & Data', d: 'OS, Networks, DB, DevOps' },
+                { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds' },
+                { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone, Thesis' },
+              ].map((s, idx) => (
+                <div key={s.y} className={`relative rounded-2xl p-5 border bg-white/70 backdrop-blur shadow-sm`}> 
+                  <div className="text-xs tracking-wide text-gray-500">{s.y}</div>
+                  <div className="font-semibold">{s.t}</div>
+                  <div className="text-sm text-gray-600 mt-2">{s.d}</div>
+                  {idx < 3 && (
+                    <div className="hidden lg:block absolute top-1/2 -right-2 translate-x-1/2 -translate-y-1/2 w-8 h-1 bg-blue-200 rounded"></div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile stacked */}
+            <div className="md:hidden space-y-4 mt-2">
+              {[
+                { y: 'Year 1', t: 'Foundations', d: 'Math, Programming, DSA, Systems thinking, Practical labs' },
+                { y: 'Year 2', t: 'Systems & Data', d: 'OS, Networks, DB, DevOps' },
+                { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds' },
+                { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone, Thesis' },
+              ].map((s) => (
+                <div key={s.y} className="rounded-2xl p-5 border bg-white shadow-sm">
+                  <div className="text-xs tracking-wide text-gray-500">{s.y}</div>
+                  <div className="font-semibold">{s.t}</div>
+                  <div className="text-sm text-gray-600 mt-2">{s.d}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Industry experience strip */}
+            <div className="mt-8 rounded-2xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 shadow">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <p className="text-xl font-bold">1.5 Years of Industrial Experience</p>
+                  <p className="text-white/80 text-sm">Embedded across Years 2–4 as paid/practical roles under mentor and faculty supervision.</p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-sm">Stage 1: Assistant Developer (6 months)</span>
+                  <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-sm">Stage 2: Applied AI Engineer (6 months)</span>
+                  <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-sm">Stage 3: Product/Cloud Specialist (6 months)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Sample term highlights */}
+            <div className="mt-8 grid md:grid-cols-3 gap-4">
+              {[
+                { h: 'Core CS', p: 'Programming, Data Structures, Algorithms, Discrete Math' },
+                { h: 'Systems & Data', p: 'OS, Networks, Databases, DevOps Fundamentals' },
+                { h: 'AI & Product', p: 'Machine Learning, Deep Learning, Cloud, Product Studios' },
+              ].map((b) => (
+                <div key={b.h} className="p-5 rounded-2xl border bg-white/70 backdrop-blur">
+                  <p className="font-semibold">{b.h}</p>
+                  <p className="text-sm text-gray-600 mt-1">{b.p}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a href="#register" className="btn-primary">See Detailed Syllabus & Apply</a>
+              <span className="text-sm text-gray-600">Includes mock tests, interview prep, and portfolio reviews.</span>
             </div>
           </div>
         </div>
