@@ -2,6 +2,23 @@ import { useState } from 'react'
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL || ''
 
+function FAQItem({ q, a }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-b">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex justify-between items-center py-4 text-left"
+        aria-expanded={open}
+      >
+        <span className="font-medium text-gray-900">{q}</span>
+        <span className={`transform transition ${open ? 'rotate-180' : ''}`}>▾</span>
+      </button>
+      {open && <p className="pb-4 text-sm text-gray-600">{a}</p>}
+    </div>
+  )
+}
+
 function App() {
   const [form, setForm] = useState({
     full_name: '',
@@ -63,150 +80,206 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      {/* Top Ticker / Social Proof */}
-      <div className="w-full bg-green-600 text-white text-center text-sm py-2">
-        Cohort graduates averaging ₹25,00,000+ CTC
+      {/* Announcement / Trust Bar */}
+      <div className="w-full bg-emerald-600 text-white text-center text-sm py-2">
+        Cohort graduates averaging ₹25,00,000+ CTC • Designed by IIIT-H Alumni • 1.5 Years of Industry Experience
       </div>
 
-      {/* Hero */}
-      <header className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto px-6 pt-14 pb-8 grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <span className="inline-flex items-center bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold mb-4">
-              4-Year B.Tech in AI & Computer Science
+      {/* Navigation */}
+      <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2">
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=200&auto=format&fit=crop" alt="AI & CS" className="h-8 w-8 rounded" />
+            <span className="font-bold">School of AI & CS</span>
+          </a>
+          <div className="hidden md:flex items-center gap-6 text-sm">
+            <a href="#program" className="hover:text-blue-700">Program</a>
+            <a href="#admissions" className="hover:text-blue-700">Admissions</a>
+            <a href="#fees" className="hover:text-blue-700">Fees</a>
+            <a href="#testimonials" className="hover:text-blue-700">Outcomes</a>
+          </div>
+          <a href="#register" className="btn-primary">Register</a>
+        </div>
+      </nav>
+
+      {/* Hero with background image */}
+      <header className="relative">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop"
+            alt="Modern AI Lab"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-900/50 to-white" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-12 grid lg:grid-cols-2 gap-10 items-center">
+          <div className="text-white">
+            <span className="inline-flex items-center bg-white/10 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold mb-4 border border-white/20">
+              4-Year B.Tech • AI & Computer Science
             </span>
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Launch Your 25 LPA Career: The 4-Year B.Tech in AI/CS with 1.5 Years of Industrial Experience.
+              Launch Your 25 LPA Career with 1.5 Years of Real Industry Experience
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
-              Curriculum designed by IIIT-Hyderabad Alumni. Your proven path from zero to industry-ready.
+            <p className="mt-4 text-lg text-blue-100 max-w-2xl">
+              A rigorous, practice-led program designed by IIIT-H alumni. Graduate with a portfolio, references, and confidence.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#register" className="btn-primary">
-                Register for the Entrance Test & Get Mocks!
-              </a>
-              <a href="#program" className="btn-secondary">Explore the Program</a>
+              <a href="#register" className="btn-hero-primary">Register & Get Mock Tests</a>
+              <a href="#program" className="btn-hero-secondary">Explore the Program</a>
             </div>
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
               {[
                 ['18-Month Experience', 'Internships + Co-ops'],
                 ['Mentor Network', 'Industry Leaders'],
                 ['Modern Labs', 'AI • Cloud • Systems'],
                 ['Career Outcomes', 'Portfolio + Placements'],
               ].map(([h, s]) => (
-                <div key={h} className="p-4 rounded-xl bg-white border shadow-sm">
+                <div key={h} className="p-4 rounded-xl bg-white/10 border border-white/20">
                   <p className="font-semibold">{h}</p>
-                  <p className="text-gray-600 text-xs mt-1">{s}</p>
+                  <p className="text-blue-100 text-xs mt-1">{s}</p>
                 </div>
               ))}
             </div>
           </div>
           <div className="relative">
-            <div className="bg-white rounded-2xl shadow-xl p-6 border border-blue-100">
-              <h3 className="text-xl font-bold">Why this B.Tech?</h3>
+            <div className="bg-white rounded-2xl shadow-xl p-6 border">
+              <h3 className="text-xl font-bold">Trusted, Structured, Outcome-Driven</h3>
               <ul className="mt-4 space-y-3 text-sm">
-                <li className="flex items-start gap-3"><span className="badge">USP</span><span>1.5 years of industry experience embedded into the curriculum</span></li>
-                <li className="flex items-start gap-3"><span className="badge">Mentors</span><span>Guidance from senior engineers and researchers</span></li>
-                <li className="flex items-start gap-3"><span className="badge">Projects</span><span>Ship real products each term with reviews and demos</span></li>
-                <li className="flex items-start gap-3"><span className="badge">Careers</span><span>Dedicated placement prep, mock interviews, and referrals</span></li>
+                <li className="flex items-start gap-3"><span className="badge">Accredited</span><span>University-affiliated degree program with transparent policies</span></li>
+                <li className="flex items-start gap-3"><span className="badge">Experience</span><span>1.5 years of embedded industry exposure across 3 stages</span></li>
+                <li className="flex items-start gap-3"><span className="badge">Placement</span><span>Career services, mock interviews, and recruiter connections</span></li>
               </ul>
-              <a href="#register" className="mt-6 inline-block btn-primary w-full text-center">Register Now</a>
+              <a href="#register" className="mt-6 inline-block btn-primary w-full text-center">Apply Now</a>
+              <div className="mt-4 flex items-center gap-3 text-xs text-gray-500">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200&auto=format&fit=crop" alt="Shield" className="h-6 w-6 rounded"/>
+                <span>Privacy-first • No spam • Opt-out anytime</span>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* The Program: AI & CS Excellence */}
-      <section id="program" className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="section-title">AI & CS Excellence</h2>
-        <p className="text-gray-600 mt-2 max-w-3xl">A future-proof curriculum that blends rigorous CS foundations with modern AI, systems, and product engineering.</p>
-
-        {/* Timeline */}
-        <div className="mt-10">
-          <h3 className="text-xl font-semibold">1.5 Years of Industry Experience</h3>
-          <p className="text-gray-600 mt-2 max-w-4xl">
-            Internships and co-op style experiences begin in Year 2. Students rotate through staged experiences—Assistant Developer (6 months),
-            Applied AI Engineer (6 months), and Product/Cloud Specialist (6 months)—totaling 18 months of on-the-job learning.
-          </p>
-
-          <div className="mt-6 grid md:grid-cols-4 gap-4">
-            {[{
-              y: 'Year 1',
-              t: 'Foundations',
-              d: 'Math, Programming, DSA, Systems thinking, Practical labs'
-            },{
-              y: 'Year 2',
-              t: 'Systems & Data',
-              d: 'OS, Networks, DB, DevOps; Internship Stage 1 (6 months)'
-            },{
-              y: 'Year 3',
-              t: 'AI & Product',
-              d: 'ML/AI, Cloud, Product builds; Internship Stage 2 (6 months)'
-            },{
-              y: 'Year 4',
-              t: 'Specialize & Ship',
-              d: 'Electives, Capstone; Internship Stage 3 (6 months)'
-            }].map((s, idx) => (
-              <div key={s.y} className={`rounded-xl p-5 border ${idx>0 ? 'bg-blue-50 border-blue-200' : 'bg-white'}`}>
-                <p className="text-xs tracking-wide text-gray-500">{s.y}</p>
-                <p className="font-semibold">{s.t}</p>
-                <p className="text-sm text-gray-600 mt-2">{s.d}</p>
+      {/* Logos / Social proof */}
+      <section className="bg-gray-50 border-y">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <p className="text-center text-sm text-gray-600">Our students build portfolios aligned with modern tech stacks used by leading companies</p>
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 items-center opacity-90">
+            {['Amazon','Microsoft','Google','NVIDIA','Adobe','Swiggy'].map((n)=> (
+              <div key={n} className="h-10 bg-white rounded border flex items-center justify-center text-gray-500 text-xs font-semibold">
+                {n}
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Faculty Advantage */}
-        <div className="mt-14">
-          <h3 className="text-xl font-semibold">Faculty Advantage</h3>
-          <p className="text-gray-600 mt-2">Learn from mentors with strong research and industry pedigree.</p>
+      {/* Program Section */}
+      <section id="program" className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
+          <div>
+            <h2 className="section-title">AI & CS Excellence</h2>
+            <p className="text-gray-600 mt-2 max-w-3xl">A future-proof curriculum that blends rigorous CS foundations with modern AI, systems, and product engineering.</p>
+            <div className="mt-8 grid md:grid-cols-2 gap-5">
+              <div className="p-6 rounded-2xl border bg-gradient-to-br from-blue-50 to-indigo-50">
+                <h3 className="font-semibold text-lg">Future-Proof Learning</h3>
+                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                  <li>AI/ML, Cloud, Distributed Systems, Security</li>
+                  <li>Product studios every term</li>
+                  <li>Project-based learning with demos</li>
+                  <li>Leadership and communication</li>
+                </ul>
+              </div>
+              <div className="p-6 rounded-2xl border bg-white">
+                <h3 className="font-semibold text-lg">Competitive Edge</h3>
+                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                  <li>ACM-ICPC, GSoC, open-source</li>
+                  <li>Hackathons and research sprints</li>
+                  <li>Interview prep & DSA marathons</li>
+                  <li>Portfolio-first placement strategy</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="relative rounded-2xl overflow-hidden shadow border">
+              <img src="https://images.unsplash.com/photo-1758270705518-b61b40527e76?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxTdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHwwfHx8MTc2Mjc4MzY3NHww&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80" alt="Students collaborating" className="w-full h-80 object-cover" />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white text-sm">Hands-on product studios, every term.</div>
+            </div>
+            {/* Timeline */}
+            <div className="mt-8">
+              <h3 className="text-xl font-semibold">1.5 Years of Industry Experience</h3>
+              <p className="text-gray-600 mt-2 max-w-4xl">
+                Internships and co-op style experiences begin in Year 2. Students rotate through staged experiences—Assistant Developer (6 months), Applied AI Engineer (6 months), and Product/Cloud Specialist (6 months)—totaling 18 months of on-the-job learning.
+              </p>
+              <div className="mt-6 grid md:grid-cols-4 gap-4">
+                {[
+                  { y: 'Year 1', t: 'Foundations', d: 'Math, Programming, DSA, Systems thinking, Practical labs' },
+                  { y: 'Year 2', t: 'Systems & Data', d: 'OS, Networks, DB, DevOps; Internship Stage 1 (6 months)' },
+                  { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds; Internship Stage 2 (6 months)' },
+                  { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone; Internship Stage 3 (6 months)' },
+                ].map((s, idx) => (
+                  <div key={s.y} className={`rounded-xl p-5 border ${idx>0 ? 'bg-blue-50 border-blue-200' : 'bg-white'}`}>
+                    <p className="text-xs tracking-wide text-gray-500">{s.y}</p>
+                    <p className="font-semibold">{s.t}</p>
+                    <p className="text-sm text-gray-600 mt-2">{s.d}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Faculty */}
+        <div className="mt-16">
+          <h3 className="text-xl font-semibold">Faculty & Mentors</h3>
           <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[{
-              name: 'Dr. A. Sharma',
-              role: 'AI Researcher • IIIT-H Alumnus',
-              bio: '12+ years in deep learning and NLP; consulting for Fortune 500.'
-            },{
-              name: 'Prof. N. Reddy',
-              role: 'Systems Engineer • IIIT-H Alumnus',
-              bio: '15+ years in distributed systems and cloud architecture.'
-            },{
-              name: 'Ms. K. Iyer',
-              role: 'Product Engineer • Industry Mentor',
-              bio: 'Built consumer products at scale; mentors student product labs.'
-            },{
-              name: 'Dr. V. Gupta',
-              role: 'Data Scientist • Research Consultant',
-              bio: 'Applied ML in healthcare and fintech; 10+ years experience.'
-            }].map((f) => (
+            {[
+              { name: 'Dr. A. Sharma', role: 'AI Researcher • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop' },
+              { name: 'Prof. N. Reddy', role: 'Systems Engineer • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop' },
+              { name: 'Ms. K. Iyer', role: 'Product Engineer • Industry Mentor', img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=400&auto=format&fit=crop' },
+              { name: 'Dr. V. Gupta', role: 'Data Scientist • Research Consultant', img: 'https://images.unsplash.com/photo-1554384645-13eab165c24b?q=80&w=400&auto=format&fit=crop' },
+            ].map((f) => (
               <div key={f.name} className="p-5 rounded-xl border bg-white shadow-sm">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500" />
+                <img src={f.img} alt={f.name} className="h-14 w-14 rounded-full object-cover" />
                 <p className="mt-3 font-semibold">{f.name}</p>
                 <p className="text-xs text-blue-700 font-medium">{f.role}</p>
-                <p className="text-sm text-gray-600 mt-2">{f.bio}</p>
+                <p className="text-sm text-gray-600 mt-2">Mentors with strong research and industry pedigree.</p>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Curriculum Focus */}
-        <div className="mt-14 grid lg:grid-cols-2 gap-8">
-          <div className="p-6 rounded-2xl border bg-white">
-            <h3 className="font-semibold text-lg">Future-Proof Learning</h3>
-            <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
-              <li>Modern stack: AI/ML, Cloud, Distributed Systems, Security</li>
-              <li>Practical labs and product studios every term</li>
-              <li>Project-based learning with demos and reviews</li>
-              <li>Communication, leadership, and engineering practices</li>
-            </ul>
-          </div>
-          <div className="p-6 rounded-2xl border bg-white">
-            <h3 className="font-semibold text-lg">Competitive Edge</h3>
-            <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
-              <li>Dedicated coaching for ACM-ICPC, Google Summer of Code (GSoC)</li>
-              <li>Hackathons, research sprints, and open-source contributions</li>
-              <li>Interview prep, DSA marathons, and career bootcamps</li>
-              <li>Portfolio-first placement strategy with referrals</li>
-            </ul>
+      {/* Outcomes & Testimonials */}
+      <section id="testimonials" className="bg-blue-50/60">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <h2 className="section-title">Outcomes You Can Trust</h2>
+          <p className="text-gray-600 mt-2 max-w-3xl">Hear from students who converted internships to offers and built real products during the program.</p>
+          <div className="mt-8 grid md:grid-cols-3 gap-6">
+            {[
+              {
+                quote: 'The product studio and industry mentors helped me ship three real apps. Interview prep felt effortless afterwards.',
+                name: 'Aarav, Class of 2024',
+                img: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400&auto=format&fit=crop',
+              },
+              {
+                quote: 'My 18-month experience across ML and Cloud translated into a pre-placement offer. The portfolio made all the difference.',
+                name: 'Isha, Class of 2024',
+                img: 'https://images.unsplash.com/photo-1544005313-967b5b4b2700?q=80&w=400&auto=format&fit=crop',
+              },
+              {
+                quote: 'The curriculum is practical and tough in the right way. Mock interviews and referrals were a big plus.',
+                name: 'Rohan, Class of 2023',
+                img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400&auto=format&fit=crop',
+              },
+            ].map((t, i) => (
+              <div key={i} className="rounded-2xl bg-white p-6 border shadow-sm">
+                <div className="flex items-center gap-3">
+                  <img src={t.img} alt={t.name} className="h-10 w-10 rounded-full object-cover" />
+                  <p className="font-medium">{t.name}</p>
+                </div>
+                <p className="mt-3 text-sm text-gray-700">“{t.quote}”</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -258,6 +331,17 @@ function App() {
               </div>
             </div>
           </div>
+
+          {/* FAQs */}
+          <div className="mt-12 max-w-3xl">
+            <h3 className="font-semibold text-lg">Frequently Asked Questions</h3>
+            <div className="mt-2 rounded-xl bg-white border">
+              <FAQItem q="Is the degree recognized?" a="Yes. It's a university-affiliated B.Tech program with all standard regulations and policies." />
+              <FAQItem q="Do you offer scholarships?" a="Yes. Merit-based scholarships are tied to your All India Rank in the entrance test." />
+              <FAQItem q="How do internships work?" a="Industry experience is embedded across Years 2–4 in three 6‑month stages under faculty and mentor supervision." />
+              <FAQItem q="Will I get placement support?" a="Yes. We offer mock interviews, resume reviews, referrals, and a portfolio-first placement strategy." />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -270,10 +354,10 @@ function App() {
             <p className="text-3xl font-extrabold mt-2">₹2,50,000<span className="text-base font-medium text-gray-600">/year</span></p>
             <p className="text-sm text-gray-600 mt-2">Transparent fee structure. Hostel and other fees (if applicable) are separate.</p>
           </div>
-          <div className="p-6 rounded-2xl border bg-white">
+          <div className="p-6 rounded-2xl border bg-gradient-to-br from-emerald-50 to-teal-50">
             <h3 className="font-semibold text-lg">Value Proposition</h3>
             <p className="text-sm text-gray-700 mt-2">
-              An investment in a guaranteed industry-ready future. The curriculum, mentorship, and 18-month industrial experience are engineered to target ₹25 LPA+ roles.
+              An investment in an industry-ready future. The curriculum, mentorship, and 18-month industrial experience are engineered to target ₹25 LPA+ roles.
             </p>
           </div>
           <div className="p-6 rounded-2xl border bg-white">
@@ -285,13 +369,26 @@ function App() {
         </div>
       </section>
 
-      {/* Register Section (CTA + Form) */}
-      <section id="register" className="bg-blue-50/50">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="bg-white rounded-2xl shadow-lg border p-6">
+      {/* Register Section */}
+      <section id="register" className="bg-slate-900">
+        <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-10 items-center">
+          <div className="text-white">
             <h2 className="text-2xl md:text-3xl font-bold">Register for the Entrance Test</h2>
-            <p className="text-gray-600 mt-1 text-sm">Register now and get access to mock tests and preparation resources.</p>
-            <form onSubmit={submit} className="mt-6 grid md:grid-cols-3 gap-4">
+            <p className="text-slate-300 mt-1 text-sm">Register now and get access to mock tests and preparation resources.</p>
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-2xl font-extrabold">18m</p>
+                <p className="text-xs text-slate-300">Industry Experience</p>
+              </div>
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-2xl font-extrabold">25 LPA</p>
+                <p className="text-xs text-slate-300">Targeted Outcomes</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-lg border p-6">
+            <form onSubmit={submit} className="grid md:grid-cols-2 gap-4">
               <input className="input" name="full_name" placeholder="Student Full Name" value={form.full_name} onChange={handleChange} required />
               <input className="input" name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
               <input className="input" name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} required />
@@ -315,20 +412,20 @@ function App() {
                 <option>Other</option>
               </select>
 
-              <input className="input" name="program_interest" placeholder="Preferred Branch/Specialization (optional)" value={form.program_interest} onChange={handleChange} />
+              <input className="input md:col-span-2" name="program_interest" placeholder="Preferred Branch/Specialization (optional)" value={form.program_interest} onChange={handleChange} />
               <input className="input" name="preferred_intake" placeholder="Preferred Intake (e.g., 2025-26)" value={form.preferred_intake} onChange={handleChange} />
               <input className="input" name="how_heard" placeholder="How did you hear about us?" value={form.how_heard} onChange={handleChange} />
-              
-              <div id="mocks" className="md:col-span-3 text-sm text-blue-700">
+
+              <div id="mocks" className="md:col-span-2 text-sm text-blue-700">
                 Get free mock tests and prep material after registration. We’ll email the access link.
               </div>
-              
-              <label className="flex items-center gap-2 text-sm md:col-span-3">
+
+              <label className="flex items-center gap-2 text-sm md:col-span-2">
                 <input type="checkbox" name="consent" checked={form.consent} onChange={handleChange} required />
                 I agree to be contacted and accept the privacy policy.
               </label>
 
-              <div className="md:col-span-3 flex items-center gap-3">
+              <div className="md:col-span-2 flex items-center gap-3">
                 <button disabled={loading} className="btn-primary">
                   {loading ? 'Submitting...' : 'Register Now'}
                 </button>
@@ -340,14 +437,38 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-10 text-center text-sm text-gray-500">© {new Date().getFullYear()} School of AI & Computer Science</footer>
+      {/* Contact & Footer */}
+      <section className="bg-white border-t">
+        <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
+          <div>
+            <p className="font-semibold">Contact</p>
+            <p className="text-sm text-gray-600 mt-2">Email: admissions@ai-cs.school</p>
+            <p className="text-sm text-gray-600">Phone: +91 98765 43210</p>
+            <p className="text-sm text-gray-600">Mon–Sat, 10am–6pm IST</p>
+          </div>
+          <div>
+            <p className="font-semibold">Visit</p>
+            <p className="text-sm text-gray-600 mt-2">123 Innovation Park, Bengaluru, India</p>
+            <p className="text-sm text-gray-600">Campus tours by appointment</p>
+          </div>
+          <div>
+            <p className="font-semibold">Policies</p>
+            <ul className="text-sm text-gray-600 mt-2 space-y-1">
+              <li><a className="hover:text-blue-700" href="#">Privacy Policy</a></li>
+              <li><a className="hover:text-blue-700" href="#">Refund Policy</a></li>
+              <li><a className="hover:text-blue-700" href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <footer className="py-8 text-center text-sm text-gray-500">© {new Date().getFullYear()} School of AI & Computer Science</footer>
 
       {/* Styles */}
       <style>{`
         .input { @apply w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500; }
         .btn-primary { @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition disabled:opacity-60; }
-        .btn-secondary { @apply bg-white border text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold; }
+        .btn-hero-primary { @apply bg-white text-blue-900 font-semibold px-6 py-3 rounded-lg hover:bg-blue-50; }
+        .btn-hero-secondary { @apply bg-transparent border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/10; }
         .badge { @apply inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700; }
         .section-title { @apply text-2xl md:text-3xl font-bold; }
       `}</style>
