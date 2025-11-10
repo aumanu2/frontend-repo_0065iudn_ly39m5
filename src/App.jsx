@@ -102,15 +102,16 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero with background image */}
+      {/* Hero with background image (updated for relevance and contrast) */}
       <header className="relative">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop"
-            alt="Modern AI Lab"
+            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop"
+            alt="University lecture hall with students"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-900/50 to-white" />
+          {/* Darker overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-950/80 via-blue-900/70 to-white" />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-12 grid lg:grid-cols-2 gap-10 items-center">
           <div className="text-white">
@@ -127,6 +128,7 @@ function App() {
               <a href="#register" className="btn-hero-primary">Register & Get Mock Tests</a>
               <a href="#program" className="btn-hero-secondary">Explore the Program</a>
             </div>
+            {/* Highlight cards: switch to solid white for strong visibility */}
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
               {[
                 ['18-Month Experience', 'Internships + Co-ops'],
@@ -134,15 +136,15 @@ function App() {
                 ['Modern Labs', 'AI • Cloud • Systems'],
                 ['Career Outcomes', 'Portfolio + Placements'],
               ].map(([h, s]) => (
-                <div key={h} className="p-4 rounded-xl bg-white/10 border border-white/20">
+                <div key={h} className="p-4 rounded-xl bg-white text-gray-900 shadow border border-gray-200">
                   <p className="font-semibold">{h}</p>
-                  <p className="text-blue-100 text-xs mt-1">{s}</p>
+                  <p className="text-gray-600 text-xs mt-1">{s}</p>
                 </div>
               ))}
             </div>
           </div>
           <div className="relative">
-            <div className="bg-white rounded-2xl shadow-xl p-6 border">
+            <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl p-6 border">
               <h3 className="text-xl font-bold">Trusted, Structured, Outcome-Driven</h3>
               <ul className="mt-4 space-y-3 text-sm">
                 <li className="flex items-start gap-3"><span className="badge">Accredited</span><span>University-affiliated degree program with transparent policies</span></li>
@@ -208,7 +210,7 @@ function App() {
             {/* Timeline */}
             <div className="mt-8">
               <h3 className="text-xl font-semibold">1.5 Years of Industry Experience</h3>
-              <p className="text-gray-600 mt-2 max-w-4xl">
+              <p className="text-gray-600 mt-2 max-4xl">
                 Internships and co-op style experiences begin in Year 2. Students rotate through staged experiences—Assistant Developer (6 months), Applied AI Engineer (6 months), and Product/Cloud Specialist (6 months)—totaling 18 months of on-the-job learning.
               </p>
               <div className="mt-6 grid md:grid-cols-4 gap-4">
