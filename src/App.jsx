@@ -102,13 +102,18 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero with background image (updated for relevance and contrast) */}
+      {/* Hero with robust image loading and graceful fallback */}
       <header className="relative">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.1.0&ixid=M3wyMDk4MTh8MHwxfHNlYXJjaHwzfHx1bml2ZXJzaXR5JTIwbGVjdHVyZSUyMGhhbGx8ZW58MHwwfHx8fDE%3D&w=1600&q=80&auto=format&fit=crop"
             alt="University lecture hall with students"
             className="w-full h-full object-cover"
+            loading="eager"
+            onError={(e) => {
+              e.currentTarget.src = 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?ixlib=rb-4.1.0&ixid=M3wyMDk4MTh8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwbGVjdHVyZXxlbnwwfDB8fHwx&w=1600&q=80&auto=format&fit=crop'
+              e.currentTarget.onerror = null
+            }}
           />
           {/* Darker overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-blue-950/80 via-blue-900/70 to-white" />
@@ -128,7 +133,7 @@ function App() {
               <a href="#register" className="btn-hero-primary">Register & Get Mock Tests</a>
               <a href="#program" className="btn-hero-secondary">Explore the Program</a>
             </div>
-            {/* Highlight cards: switch to solid white for strong visibility */}
+            {/* Highlight cards: solid white for strong visibility */}
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
               {[
                 ['18-Month Experience', 'Internships + Co-ops'],
@@ -175,78 +180,105 @@ function App() {
         </div>
       </section>
 
-      {/* Program Section */}
-      <section id="program" className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
-          <div>
+      {/* Program Section – redesigned with improved alignment and glassmorphism */}
+      <section id="program" className="relative">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-blue-50/60 to-white" />
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="mb-10 text-center">
             <h2 className="section-title">AI & CS Excellence</h2>
-            <p className="text-gray-600 mt-2 max-w-3xl">A future-proof curriculum that blends rigorous CS foundations with modern AI, systems, and product engineering.</p>
-            <div className="mt-8 grid md:grid-cols-2 gap-5">
-              <div className="p-6 rounded-2xl border bg-gradient-to-br from-blue-50 to-indigo-50">
-                <h3 className="font-semibold text-lg">Future-Proof Learning</h3>
-                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
-                  <li>AI/ML, Cloud, Distributed Systems, Security</li>
-                  <li>Product studios every term</li>
-                  <li>Project-based learning with demos</li>
-                  <li>Leadership and communication</li>
-                </ul>
+            <p className="text-gray-600 mt-2 max-w-3xl mx-auto">A future-proof curriculum that blends rigorous CS foundations with modern AI, systems, and product engineering.</p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
+            {/* Left: Feature grid using glass cards */}
+            <div className="grid sm:grid-cols-2 gap-5">
+              {[
+                {
+                  title: 'Future-Proof Learning',
+                  points: ['AI/ML, Cloud, Distributed Systems, Security','Product studios every term','Project-based learning with demos','Leadership and communication'],
+                },
+                {
+                  title: 'Competitive Edge',
+                  points: ['ACM-ICPC, GSoC, open-source','Hackathons and research sprints','Interview prep & DSA marathons','Portfolio-first placement strategy'],
+                },
+                {
+                  title: 'Modern Lab Tracks',
+                  points: ['Applied AI Lab','Cloud & DevOps Lab','Systems & Security Lab','Product Engineering Lab'],
+                },
+                {
+                  title: 'Mentor Network',
+                  points: ['Industry leaders every term','Office hours & reviews','Career guidance & referrals','Alumni support'],
+                },
+              ].map((card) => (
+                <div key={card.title} className="p-6 rounded-2xl border border-white/30 bg-white/60 backdrop-blur shadow-sm">
+                  <h3 className="font-semibold text-lg">{card.title}</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                    {card.points.map((p) => (
+                      <li key={p}>{p}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: Visual + timeline */}
+            <div>
+              <div className="relative rounded-2xl overflow-hidden shadow border bg-white/50 backdrop-blur">
+                <img
+                  src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?ixlib=rb-4.1.0&ixid=M3wyMDk4MTh8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHwwfHx8fDE%3D&w=1400&q=80&auto=format&fit=crop"
+                  alt="Students collaborating"
+                  className="w-full h-80 object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?ixlib=rb-4.1.0&ixid=M3wyMDk4MTh8MHwxfHNlYXJjaHwzfHx0ZWFtd29ya3xlbnwwfDB8fHwx&w=1400&q=80&auto=format&fit=crop'
+                    e.currentTarget.onerror = null
+                  }}
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white text-sm">Hands-on product studios, every term.</div>
               </div>
-              <div className="p-6 rounded-2xl border bg-white">
-                <h3 className="font-semibold text-lg">Competitive Edge</h3>
-                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
-                  <li>ACM-ICPC, GSoC, open-source</li>
-                  <li>Hackathons and research sprints</li>
-                  <li>Interview prep & DSA marathons</li>
-                  <li>Portfolio-first placement strategy</li>
-                </ul>
+
+              {/* Timeline */}
+              <div className="mt-8">
+                <h3 className="text-xl font-semibold">1.5 Years of Industry Experience</h3>
+                <p className="text-gray-600 mt-2 max-w-4xl">
+                  Internships and co-op style experiences begin in Year 2. Students rotate through staged experiences—Assistant Developer (6 months), Applied AI Engineer (6 months), and Product/Cloud Specialist (6 months)—totaling 18 months of on-the-job learning.
+                </p>
+                <div className="mt-6 grid md:grid-cols-4 gap-4">
+                  {[
+                    { y: 'Year 1', t: 'Foundations', d: 'Math, Programming, DSA, Systems thinking, Practical labs' },
+                    { y: 'Year 2', t: 'Systems & Data', d: 'OS, Networks, DB, DevOps; Internship Stage 1 (6 months)' },
+                    { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds; Internship Stage 2 (6 months)' },
+                    { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone; Internship Stage 3 (6 months)' },
+                  ].map((s, idx) => (
+                    <div key={s.y} className={`rounded-xl p-5 border ${idx>0 ? 'bg-white/60 border-white/30 backdrop-blur' : 'bg-white/90'} shadow-sm`}>
+                      <p className="text-xs tracking-wide text-gray-500">{s.y}</p>
+                      <p className="font-semibold">{s.t}</p>
+                      <p className="text-sm text-gray-600 mt-2">{s.d}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-          <div>
-            <div className="relative rounded-2xl overflow-hidden shadow border">
-              <img src="https://images.unsplash.com/photo-1758270705518-b61b40527e76?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxTdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHwwfHx8MTc2Mjc4MzY3NHww&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80" alt="Students collaborating" className="w-full h-80 object-cover" />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white text-sm">Hands-on product studios, every term.</div>
+
+          {/* Faculty */}
+          <div className="mt-16">
+            <h3 className="text-xl font-semibold">Faculty & Mentors</h3>
+            <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                { name: 'Dr. A. Sharma', role: 'AI Researcher • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop' },
+                { name: 'Prof. N. Reddy', role: 'Systems Engineer • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop' },
+                { name: 'Ms. K. Iyer', role: 'Product Engineer • Industry Mentor', img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=400&auto=format&fit=crop' },
+                { name: 'Dr. V. Gupta', role: 'Data Scientist • Research Consultant', img: 'https://images.unsplash.com/photo-1554384645-13eab165c24b?q=80&w=400&auto=format&fit=crop' },
+              ].map((f) => (
+                <div key={f.name} className="p-5 rounded-xl border bg-white shadow-sm">
+                  <img src={f.img} alt={f.name} className="h-14 w-14 rounded-full object-cover" />
+                  <p className="mt-3 font-semibold">{f.name}</p>
+                  <p className="text-xs text-blue-700 font-medium">{f.role}</p>
+                  <p className="text-sm text-gray-600 mt-2">Mentors with strong research and industry pedigree.</p>
+                </div>
+              ))}
             </div>
-            {/* Timeline */}
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold">1.5 Years of Industry Experience</h3>
-              <p className="text-gray-600 mt-2 max-4xl">
-                Internships and co-op style experiences begin in Year 2. Students rotate through staged experiences—Assistant Developer (6 months), Applied AI Engineer (6 months), and Product/Cloud Specialist (6 months)—totaling 18 months of on-the-job learning.
-              </p>
-              <div className="mt-6 grid md:grid-cols-4 gap-4">
-                {[
-                  { y: 'Year 1', t: 'Foundations', d: 'Math, Programming, DSA, Systems thinking, Practical labs' },
-                  { y: 'Year 2', t: 'Systems & Data', d: 'OS, Networks, DB, DevOps; Internship Stage 1 (6 months)' },
-                  { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds; Internship Stage 2 (6 months)' },
-                  { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone; Internship Stage 3 (6 months)' },
-                ].map((s, idx) => (
-                  <div key={s.y} className={`rounded-xl p-5 border ${idx>0 ? 'bg-blue-50 border-blue-200' : 'bg-white'}`}>
-                    <p className="text-xs tracking-wide text-gray-500">{s.y}</p>
-                    <p className="font-semibold">{s.t}</p>
-                    <p className="text-sm text-gray-600 mt-2">{s.d}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Faculty */}
-        <div className="mt-16">
-          <h3 className="text-xl font-semibold">Faculty & Mentors</h3>
-          <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              { name: 'Dr. A. Sharma', role: 'AI Researcher • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop' },
-              { name: 'Prof. N. Reddy', role: 'Systems Engineer • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop' },
-              { name: 'Ms. K. Iyer', role: 'Product Engineer • Industry Mentor', img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=400&auto=format&fit=crop' },
-              { name: 'Dr. V. Gupta', role: 'Data Scientist • Research Consultant', img: 'https://images.unsplash.com/photo-1554384645-13eab165c24b?q=80&w=400&auto=format&fit=crop' },
-            ].map((f) => (
-              <div key={f.name} className="p-5 rounded-xl border bg-white shadow-sm">
-                <img src={f.img} alt={f.name} className="h-14 w-14 rounded-full object-cover" />
-                <p className="mt-3 font-semibold">{f.name}</p>
-                <p className="text-xs text-blue-700 font-medium">{f.role}</p>
-                <p className="text-sm text-gray-600 mt-2">Mentors with strong research and industry pedigree.</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
