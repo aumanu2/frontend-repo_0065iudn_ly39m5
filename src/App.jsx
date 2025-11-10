@@ -11,10 +11,10 @@ function FAQItem({ q, a }) {
         className="w-full flex justify-between items-center py-4 text-left"
         aria-expanded={open}
       >
-        <span className="font-medium text-gray-900">{q}</span>
+        <span className="font-medium text-gray-900 dark:text-gray-100">{q}</span>
         <span className={`transform transition ${open ? 'rotate-180' : ''}`}>▾</span>
       </button>
-      {open && <p className="pb-4 text-sm text-gray-600">{a}</p>}
+      {open && <p className="pb-4 text-sm text-gray-600 dark:text-gray-300">{a}</p>}
     </div>
   )
 }
@@ -89,7 +89,7 @@ function App() {
       <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
-            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=200&auto=format&fit=crop" alt="AI & CS" className="h-8 w-8 rounded" />
+            <img src="https://images.unsplash.com/photo-1744640326166-433469d102f2?ixid=M3w3OTkxMTl8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NjI4MDI3MjB8&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80" alt="AI & CS" className="h-8 w-8 rounded" />
             <span className="font-bold">School of AI & CS</span>
           </a>
           <div className="hidden md:flex items-center gap-6 text-sm">
@@ -159,7 +159,7 @@ function App() {
               </ul>
               <a href="#register" className="mt-6 inline-block btn-primary w-full text-center">Apply Now</a>
               <div className="mt-4 flex items-center gap-3 text-xs text-gray-500">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200&auto=format&fit=crop" alt="Shield" className="h-6 w-6 rounded"/>
+                <img src="https://images.unsplash.com/photo-1536258988771-e87178795771?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxTaGllbGR8ZW58MHwwfHx8MTc2MjgwMjcyMXww&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80" alt="Shield" className="h-6 w-6 rounded"/>
                 <span>Privacy-first • No spam • Opt-out anytime</span>
               </div>
             </div>
@@ -181,7 +181,7 @@ function App() {
         </div>
       </section>
 
-      {/* Program Section – redesigned with improved alignment and glassmorphism */}
+      {/* Program Section – light */}
       <section id="program" className="relative">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-blue-50/60 to-white" />
         <div className="max-w-7xl mx-auto px-6 py-16">
@@ -262,13 +262,13 @@ function App() {
         </div>
       </section>
 
-      {/* 4-Year B.Tech Curriculum (moved and redesigned timeline with 1.5 years of industry experience) */}
-      <section id="curriculum" className="relative">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50/60 via-white to-blue-50/40" />
+      {/* 4-Year B.Tech Curriculum – dark */}
+      <section id="curriculum" className="relative bg-slate-900 text-slate-100">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-black opacity-90" />
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center">
-            <h2 className="section-title">4-Year B.Tech Curriculum</h2>
-            <p className="text-gray-600 mt-2 max-w-3xl mx-auto">A clear, outcome-driven roadmap from solid CS foundations to advanced AI and product engineering—punctuated with real industry experience.</p>
+            <h2 className="section-title text-white">4-Year B.Tech Curriculum</h2>
+            <p className="text-slate-300 mt-2 max-w-3xl mx-auto">A clear, outcome-driven roadmap from solid CS foundations to advanced AI and product engineering—punctuated with real industry experience.</p>
           </div>
 
           {/* Horizontal roadmap */}
@@ -280,12 +280,12 @@ function App() {
                 { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds' },
                 { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone, Thesis' },
               ].map((s, idx) => (
-                <div key={s.y} className={`relative rounded-2xl p-5 border bg-white/70 backdrop-blur shadow-sm`}> 
-                  <div className="text-xs tracking-wide text-gray-500">{s.y}</div>
-                  <div className="font-semibold">{s.t}</div>
-                  <div className="text-sm text-gray-600 mt-2">{s.d}</div>
+                <div key={s.y} className={`relative rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm`}> 
+                  <div className="text-xs tracking-wide text-slate-300">{s.y}</div>
+                  <div className="font-semibold text-white">{s.t}</div>
+                  <div className="text-sm text-slate-300 mt-2">{s.d}</div>
                   {idx < 3 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-2 translate-x-1/2 -translate-y-1/2 w-8 h-1 bg-blue-200 rounded"></div>
+                    <div className="hidden lg:block absolute top-1/2 -right-2 translate-x-1/2 -translate-y-1/2 w-8 h-1 bg-slate-600 rounded"></div>
                   )}
                 </div>
               ))}
@@ -299,20 +299,20 @@ function App() {
                 { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds' },
                 { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone, Thesis' },
               ].map((s) => (
-                <div key={s.y} className="rounded-2xl p-5 border bg-white shadow-sm">
-                  <div className="text-xs tracking-wide text-gray-500">{s.y}</div>
-                  <div className="font-semibold">{s.t}</div>
-                  <div className="text-sm text-gray-600 mt-2">{s.d}</div>
+                <div key={s.y} className="rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm">
+                  <div className="text-xs tracking-wide text-slate-300">{s.y}</div>
+                  <div className="font-semibold text-white">{s.t}</div>
+                  <div className="text-sm text-slate-300 mt-2">{s.d}</div>
                 </div>
               ))}
             </div>
 
             {/* Industry experience strip */}
-            <div className="mt-8 rounded-2xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 shadow">
+            <div className="mt-8 rounded-2xl border border-white/10 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-6 shadow">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                   <p className="text-xl font-bold">1.5 Years of Industrial Experience</p>
-                  <p className="text-white/80 text-sm">Embedded across Years 2–4 as paid/practical roles under mentor and faculty supervision.</p>
+                  <p className="text-white/90 text-sm">Embedded across Years 2–4 as paid/practical roles under mentor and faculty supervision.</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-sm">Stage 1: Assistant Developer (6 months)</span>
@@ -329,26 +329,26 @@ function App() {
                 { h: 'Systems & Data', p: 'OS, Networks, Databases, DevOps Fundamentals' },
                 { h: 'AI & Product', p: 'Machine Learning, Deep Learning, Cloud, Product Studios' },
               ].map((b) => (
-                <div key={b.h} className="p-5 rounded-2xl border bg-white/70 backdrop-blur">
-                  <p className="font-semibold">{b.h}</p>
-                  <p className="text-sm text-gray-600 mt-1">{b.p}</p>
+                <div key={b.h} className="p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+                  <p className="font-semibold text-white">{b.h}</p>
+                  <p className="text-sm text-slate-300 mt-1">{b.p}</p>
                 </div>
               ))}
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a href="#register" className="btn-primary">See Detailed Syllabus & Apply</a>
-              <span className="text-sm text-gray-600">Includes mock tests, interview prep, and portfolio reviews.</span>
+              <span className="text-sm text-slate-300">Includes mock tests, interview prep, and portfolio reviews.</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Outcomes & Testimonials */}
-      <section id="testimonials" className="bg-blue-50/60">
+      {/* Outcomes & Testimonials – dark */}
+      <section id="testimonials" className="bg-slate-950">
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <h2 className="section-title">Outcomes You Can Trust</h2>
-          <p className="text-gray-600 mt-2 max-w-3xl">Hear from students who converted internships to offers and built real products during the program.</p>
+          <h2 className="section-title text-white">Outcomes You Can Trust</h2>
+          <p className="text-slate-300 mt-2 max-w-3xl">Hear from students who converted internships to offers and built real products during the program.</p>
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             {[
               {
@@ -367,19 +367,19 @@ function App() {
                 img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400&auto=format&fit=crop',
               },
             ].map((t, i) => (
-              <div key={i} className="rounded-2xl bg-white p-6 border shadow-sm">
+              <div key={i} className="rounded-2xl bg-white/5 p-6 border border-white/10 shadow-sm">
                 <div className="flex items-center gap-3">
                   <img src={t.img} alt={t.name} className="h-10 w-10 rounded-full object-cover" />
-                  <p className="font-medium">{t.name}</p>
+                  <p className="font-medium text-white">{t.name}</p>
                 </div>
-                <p className="mt-3 text-sm text-gray-700">“{t.quote}”</p>
+                <p className="mt-3 text-sm text-slate-200">“{t.quote}”</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Admissions */}
+      {/* Admissions – light */}
       <section id="admissions" className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <h2 className="section-title">Admissions: The Entrance Test</h2>
@@ -440,7 +440,7 @@ function App() {
         </div>
       </section>
 
-      {/* Fees & Financials */}
+      {/* Fees & Financials – light with one dark accent card */}
       <section id="fees" className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="section-title">Fees & Financials</h2>
         <div className="mt-6 grid lg:grid-cols-3 gap-8">
@@ -449,9 +449,9 @@ function App() {
             <p className="text-3xl font-extrabold mt-2">₹2,50,000<span className="text-base font-medium text-gray-600">/year</span></p>
             <p className="text-sm text-gray-600 mt-2">Transparent fee structure. Hostel and other fees (if applicable) are separate.</p>
           </div>
-          <div className="p-6 rounded-2xl border bg-gradient-to-br from-emerald-50 to-teal-50">
+          <div className="p-6 rounded-2xl border bg-slate-900 text-white">
             <h3 className="font-semibold text-lg">Value Proposition</h3>
-            <p className="text-sm text-gray-700 mt-2">
+            <p className="text-sm text-slate-200 mt-2">
               An investment in an industry-ready future. The curriculum, mentorship, and 18-month industrial experience are engineered to target ₹25 LPA+ roles.
             </p>
           </div>
@@ -464,7 +464,7 @@ function App() {
         </div>
       </section>
 
-      {/* Register Section */}
+      {/* Register Section – dark already */}
       <section id="register" className="bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-10 items-center">
           <div className="text-white">
@@ -524,8 +524,8 @@ function App() {
                 <button disabled={loading} className="btn-primary">
                   {loading ? 'Submitting...' : 'Register Now'}
                 </button>
-                {submitted && <span className="text-green-700">Thank you! Your registration ID: {submitted}</span>}
-                {error && <span className="text-red-600">{error}</span>}
+                {submitted && <span className="text-green-500">Thank you! Your registration ID: {submitted}</span>}
+                {error && <span className="text-red-400">{error}</span>}
               </div>
             </form>
           </div>
