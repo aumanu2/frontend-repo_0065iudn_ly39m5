@@ -78,6 +78,56 @@ function App() {
     }
   }
 
+  // Company logos for marquee section (between Hero and Achievers Track)
+  const logos = [
+    { name: 'Amazon', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png' },
+    { name: 'Microsoft', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png' },
+    { name: 'Google', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png' },
+    { name: 'Adobe', src: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Adobe_Corporate_Logo.png' },
+    { name: 'Nvidia', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/NVIDIA_logo.svg/2560px-NVIDIA_logo.svg.png' },
+    { name: 'Swiggy', src: 'https://brandlogos.net/wp-content/uploads/2023/09/swiggy-logo_brandlogos.net_fplmb.png' },
+  ]
+
+  // Faculty & Mentors data (updated)
+  const faculties = [
+    {
+      name: 'Manas Kumar Verma',
+      img: 'https://i.ibb.co/d06Vp063/Copy-of-ASCSAI-Deck.png',
+      desc: 'India’s top 15 competitive programmer, youngest intern at Directi. Mentor who has taught and guided over 50,000 learners so far in their careers. Previously a Quant Trader at Alphagrep Singapore.',
+      logos: [
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLi4bV42Izq5HiSKnjgtwmw75T-0NR5qHDFA&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSN_zYUgpd1kHbtwdAQeR3tONMpWAq9_8YjQ&s',
+      ],
+    },
+    {
+      name: 'Swapnil Daga',
+      img: 'https://i.ibb.co/CsTh9Pm0/Copy-of-ASCSAI-Deck-1.png',
+      desc: 'Guided over 50,000+ learners in their career so far. Right after college, Swapnil has cracked Google London & then moved on to Apple India. Currently leads teaching infra at AlgoUniversity.',
+      logos: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png',
+        'https://www.shutterstock.com/image-vector/galati-romania-april-29-2023-600nw-2295394661.jpg',
+      ],
+    },
+    {
+      name: 'Nikita Agarwal',
+      img: 'https://i.ibb.co/S7yK2pM9/Copy-of-ASCSAI-Deck-2.png',
+      desc: 'Previously at Microsoft as Data Scientist and Indeed as a senior software engineer. Nikita has logged almost 1000+ interviews for both students incoming to companies and companies’ roles.',
+      logos: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Indeed_logo.svg/2560px-Indeed_logo.svg.png',
+      ],
+    },
+    {
+      name: 'Nalin Abrol',
+      img: 'https://i.ibb.co/zTcq8tD3/Copy-of-ASCSAI-Deck-3.png',
+      desc: 'Before joining AlgoUniversity as a CTO, Nalin scaled tech-infra for a unicorn startup Plivo. He built and scaled TheJobOverflow (India’s fastest growing job prep platform), to 80,000+ active users in 6mo!',
+      logos: [
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLsrm3rT3sn0p9C-_2T_dKMvaD0srxxnFqWg&s',
+        'https://d3uam8jk4sa4y4.cloudfront.net/static/images/tjo_algou2.png',
+      ],
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Announcement / Trust Bar */}
@@ -103,7 +153,7 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero with robust image loading and graceful fallback */}
+      {/* Hero */}
       <header className="relative">
         <div className="absolute inset-0">
           <img
@@ -125,16 +175,16 @@ function App() {
               4-Year B.Tech • AI & Computer Science
             </span>
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Launch Your 25 LPA Career with 1.5 Years of Real Industry Experience
+              AlgoUniversity School of CS/AI
             </h1>
             <p className="mt-4 text-lg text-blue-100 max-w-2xl">
-              A rigorous, practice-led program designed by IIIT-H alumni. Graduate with a portfolio, references, and confidence.
+              A next‑gen engineering program shaped by IIIT-Hyd Alums. Learn directly from industrial leaders, graduate with 1.5 years of Industrial experience.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#register" className="btn-hero-primary">Register & Get Mock Tests</a>
               <a href="#program" className="btn-hero-secondary">Explore the Program</a>
             </div>
-            {/* Highlight cards: solid white for strong visibility */}
+            {/* Highlight cards */}
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
               {[
                 ['18-Month Experience', 'Internships + Co-ops'],
@@ -149,115 +199,221 @@ function App() {
               ))}
             </div>
           </div>
+
+          {/* Right: Landscape video section */}
           <div className="relative">
-            <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl p-6 border">
-              <h3 className="text-xl font-bold">Trusted, Structured, Outcome-Driven</h3>
-              <ul className="mt-4 space-y-3 text-sm">
-                <li className="flex items-start gap-3"><span className="badge">Accredited</span><span>University-affiliated degree program with transparent policies</span></li>
-                <li className="flex items-start gap-3"><span className="badge">Experience</span><span>1.5 years of embedded industry exposure across 3 stages</span></li>
-                <li className="flex items-start gap-3"><span className="badge">Placement</span><span>Career services, mock interviews, and recruiter connections</span></li>
-              </ul>
-              <a href="#register" className="mt-6 inline-block btn-primary w-full text-center">Apply Now</a>
-              <div className="mt-4 flex items-center gap-3 text-xs text-gray-500">
-                <img src="https://images.unsplash.com/photo-1536258988771-e87178795771?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxTaGllbGR8ZW58MHwwfHx8MTc2MjgwMjcyMXww&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80" alt="Shield" className="h-6 w-6 rounded"/>
-                <span>Privacy-first • No spam • Opt-out anytime</span>
+            <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl p-4 border">
+              <div className="relative w-full rounded-xl overflow-hidden border bg-black pb-[56.25%]">
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
+                  title="Program Overview Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
               </div>
+              <p className="text-sm text-gray-600 mt-3 px-1">Watch a quick overview of our AI/CS program and industrial immersion.</p>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Logos / Social proof */}
-      <section className="bg-gray-50 border-y">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <p className="text-center text-sm text-gray-600">Our students build portfolios aligned with modern tech stacks used by leading companies</p>
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 items-center opacity-90">
-            {['Amazon','Microsoft','Google','NVIDIA','Adobe','Swiggy'].map((n)=> (
-              <div key={n} className="h-10 bg-white rounded border flex items-center justify-center text-gray-500 text-xs font-semibold">
-                {n}
-              </div>
-            ))}
+      {/* Logo Marquee Section (between Hero and Achievers Track) */}
+      <section aria-label="Hiring partners" className="relative bg-white border-y">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <p className="text-center text-xs uppercase tracking-widest text-gray-500 mb-3">Our students have worked at</p>
+        </div>
+        <div className="relative overflow-hidden py-4">
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent" />
+          <div className="logo-marquee gap-10 px-6">
+            <div className="flex items-center gap-10">
+              {logos.map((l) => (
+                <div key={l.name} className="h-10 flex items-center shrink-0">
+                  <img
+                    src={l.src}
+                    alt={l.name}
+                    className="h-8 sm:h-10 w-auto object-contain opacity-95"
+                    onError={(e) => { e.currentTarget.style.display = 'none' }}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-10" aria-hidden="true">
+              {logos.map((l, i) => (
+                <div key={`${l.name}-${i}`} className="h-10 flex items-center shrink-0">
+                  <img
+                    src={l.src}
+                    alt={l.name}
+                    className="h-8 sm:h-10 w-auto object-contain opacity-95"
+                    onError={(e) => { e.currentTarget.style.display = 'none' }}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Program Section – light */}
+      {/* Achievers Track – redesigned (light) */}
       <section id="program" className="relative">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-blue-50/60 to-white" />
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="mb-10 text-center">
-            <h2 className="section-title">AI & CS Excellence</h2>
-            <p className="text-gray-600 mt-2 max-w-3xl mx-auto">A future-proof curriculum that blends rigorous CS foundations with modern AI, systems, and product engineering.</p>
+            <h2 className="section-title">Achievers Track</h2>
+            <p className="text-gray-600 mt-2 max-w-3xl mx-auto">Elite preparation tracks to excel in global programs and competitions—starting early, mentored by experts, and focused on real outcomes.</p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
-            {/* Left: Feature grid using glass cards */}
-            <div className="grid sm:grid-cols-2 gap-5">
-              {[
-                {
-                  title: 'Future-Proof Learning',
-                  points: ['AI/ML, Cloud, Distributed Systems, Security','Product studios every term','Project-based learning with demos','Leadership and communication'],
-                },
-                {
-                  title: 'Competitive Edge',
-                  points: ['ACM-ICPC, GSoC, open-source','Hackathons and research sprints','Interview prep & DSA marathons','Portfolio-first placement strategy'],
-                },
-                {
-                  title: 'Modern Lab Tracks',
-                  points: ['Applied AI Lab','Cloud & DevOps Lab','Systems & Security Lab','Product Engineering Lab'],
-                },
-                {
-                  title: 'Mentor Network',
-                  points: ['Industry leaders every term','Office hours & reviews','Career guidance & referrals','Alumni support'],
-                },
-              ].map((card) => (
-                <div key={card.title} className="p-6 rounded-2xl border border-white/30 bg-white/60 backdrop-blur shadow-sm">
-                  <h3 className="font-semibold text-lg">{card.title}</h3>
-                  <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
-                    {card.points.map((p) => (
-                      <li key={p}>{p}</li>
-                    ))}
-                  </ul>
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* GSoC Track */}
+            <div className="group rounded-2xl p-[2px] bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 shadow-[0_1px_0_rgba(0,0,0,0.06)] hover:shadow-xl transition-transform hover:-translate-y-1">
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur border border-white/60">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-lg">Google Summer of Code (GSoC) Track</p>
+                    <p className="text-xs text-amber-600 font-medium">Module from 1st year itself</p>
+                  </div>
+                  <div className="shrink-0 rounded-xl bg-amber-50 border border-amber-200 p-2">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/GSoC_logo.svg/1200px-GSoC_logo.svg.png"
+                      alt="Google Summer of Code"
+                      className="h-8 w-8 object-contain"
+                      onError={(e) => { e.currentTarget.style.display = 'none' }}
+                    />
+                  </div>
                 </div>
-              ))}
+                <p className="text-sm text-gray-700 mt-4">Earn 2 Lakh/month for open‑source contribution. Build a global portfolio with real maintainers.</p>
+                <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                  <span className="badge bg-amber-100 text-amber-700">Open‑source mentoring</span>
+                  <span className="badge bg-amber-100 text-amber-700">Weekly code reviews</span>
+                  <span className="badge bg-amber-100 text-amber-700">Project selection support</span>
+                </div>
+              </div>
             </div>
 
-            {/* Right: Visual */}
-            <div>
-              <div className="relative rounded-2xl overflow-hidden shadow border bg-white/50 backdrop-blur">
-                <img
-                  src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?ixlib=rb-4.1.0&ixid=M3wyMDk4MTh8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHwwfHx8fDE%3D&w=1400&q=80&auto=format&fit=crop"
-                  alt="Students collaborating"
-                  className="w-full h-80 object-cover"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?ixlib=rb-4.1.0&ixid=M3wyMDk4MTh8MHwxfHNlYXJjaHwzfHx0ZWFtd29ya3xlbnwwfDB8fHwx&w=1400&q=80&auto=format&fit=crop'
-                    e.currentTarget.onerror = null
-                  }}
-                />
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white text-sm">Hands-on product studios, every term.</div>
+            {/* Facebook HackerCup Track */}
+            <div className="group rounded-2xl p-[2px] bg-gradient-to-r from-sky-500 to-blue-600 shadow-[0_1px_0_rgba(0,0,0,0.06)] hover:shadow-xl transition-transform hover:-translate-y-1">
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur border border-white/60">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-lg">Facebook HackerCup Track</p>
+                    <p className="text-xs text-blue-600 font-medium">Competitive programming excellence</p>
+                  </div>
+                  <div className="shrink-0 rounded-xl bg-blue-50 border border-blue-200 p-2">
+                    <img
+                      src="https://miro.medium.com/v2/1*4H9wF_zCFyYlDREHAD7j0g.png"
+                      alt="Facebook HackerCup"
+                      className="h-8 w-8 object-contain"
+                      onError={(e) => { e.currentTarget.style.display = 'none' }}
+                    />
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700 mt-4">In 2025, 40 out of top 50 were AlgoUniversity students. Train with champions and past finalists.</p>
+                <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                  <span className="badge">DSA marathons</span>
+                  <span className="badge">Weekly leaderboards</span>
+                  <span className="badge">Contest strategy</span>
+                </div>
+              </div>
+            </div>
+
+            {/* ACM ICPC Track */}
+            <div className="group rounded-2xl p-[2px] bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 shadow-[0_1px_0_rgba(0,0,0,0.06)] hover:shadow-xl transition-transform hover:-translate-y-1">
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur border border-white/60">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-lg">ACM ICPC Track</p>
+                    <p className="text-xs text-rose-600 font-medium">Olympics for Programming</p>
+                  </div>
+                  <div className="shrink-0 rounded-xl bg-rose-50 border border-rose-200 p-2">
+                    <img
+                      src="https://blog.jetbrains.com/wp-content/uploads/2017/05/icpc_logo.png"
+                      alt="ACM ICPC"
+                      className="h-8 w-8 object-contain"
+                      onError={(e) => { e.currentTarget.style.display = 'none' }}
+                    />
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700 mt-4">2024: 14 AlgoUniversity students qualified for regionals. Team coaching and problem‑solving bootcamps.</p>
+                <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                  <span className="badge bg-rose-100 text-rose-700">Team formation</span>
+                  <span className="badge bg-rose-100 text-rose-700">Coach reviews</span>
+                  <span className="badge bg-rose-100 text-rose-700">Regional prep</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Faculty */}
-          <div className="mt-16">
-            <h3 className="text-xl font-semibold">Faculty & Mentors</h3>
-            <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[
-                { name: 'Dr. A. Sharma', role: 'AI Researcher • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop' },
-                { name: 'Prof. N. Reddy', role: 'Systems Engineer • IIIT-H Alumnus', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop' },
-                { name: 'Ms. K. Iyer', role: 'Product Engineer • Industry Mentor', img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=400&auto=format&fit=crop' },
-                { name: 'Dr. V. Gupta', role: 'Data Scientist • Research Consultant', img: 'https://images.unsplash.com/photo-1554384645-13eab165c24b?q=80&w=400&auto=format&fit=crop' },
-              ].map((f) => (
-                <div key={f.name} className="p-5 rounded-xl border bg-white shadow-sm">
-                  <img src={f.img} alt={f.name} className="h-14 w-14 rounded-full object-cover" />
-                  <p className="mt-3 font-semibold">{f.name}</p>
-                  <p className="text-xs text-blue-700 font-medium">{f.role}</p>
-                  <p className="text-sm text-gray-600 mt-2">Mentors with strong research and industry pedigree.</p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <a href="#register" className="btn-primary">Join the Achievers Track</a>
+            <span className="text-sm text-gray-600">Start early, get mentored, and aim for global accolades.</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Faculty & Mentors – premium with image background and enhanced cards */}
+      <section id="faculty" className="relative">
+        {/* Background image layer */}
+        <div className="absolute inset-0 -z-10">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/001/838/294/small/abstract-background-white-and-gray-diagonal-stripes-lines-3d-cover-of-business-presentation-banner-web-vector.jpg"
+            alt="Section background"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+          {/* Subtle dark blue/black gradient tint for differentiation */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-blue-900/20 to-black/40 mix-blend-multiply pointer-events-none" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="text-center">
+            <h2 className="section-title">Faculty & Mentors</h2>
+            <p className="text-gray-600 mt-2 max-w-3xl mx-auto">Learn from leaders who have built at world‑class companies and shipped real products. Practical, outcomes‑driven mentorship.</p>
+          </div>
+
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {faculties.map((f) => (
+              <div key={f.name} className="group rounded-2xl p-[1.5px] bg-gradient-to-br from-indigo-500/30 via-blue-400/20 to-sky-400/30 shadow-[0_1px_0_rgba(0,0,0,0.06)] hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="relative h-full rounded-2xl bg-white/90 backdrop-blur border border-white/60 overflow-hidden">
+                  {/* top badge */}
+                  <div className="absolute top-3 left-3 z-10 px-2 py-0.5 text-[11px] rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">Mentor</div>
+                  {/* image */}
+                  <div className="relative">
+                    <img
+                      src={f.img}
+                      alt={f.name}
+                      className="h-44 w-full object-cover"
+                      onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=600&auto=format&fit=crop' }}
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent opacity-70" />
+                  </div>
+                  {/* content */}
+                  <div className="p-4">
+                    <p className="font-semibold text-lg tracking-tight">{f.name}</p>
+                    <p className="mt-2 text-sm text-gray-700 leading-relaxed">{f.desc}</p>
+                    {/* logos */}
+                    <div className="mt-4 flex items-center gap-3">
+                      {f.logos.map((logo, i) => (
+                        <div key={i} className="h-6 w-auto">
+                          <img
+                            src={logo}
+                            alt={`logo-${i}`}
+                            className="h-6 w-auto object-contain grayscale group-hover:grayscale-0 transition"
+                            onError={(e) => { e.currentTarget.style.display = 'none' }}
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* hover shine */}
+                  <div className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500" style={{ background: 'radial-gradient(120px 80px at var(--x,80%) -20%, rgba(59,130,246,0.25), transparent 60%)' }} />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -280,10 +436,12 @@ function App() {
                 { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds' },
                 { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone, Thesis' },
               ].map((s, idx) => (
-                <div key={s.y} className={`relative rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm`}> 
-                  <div className="text-xs tracking-wide text-slate-300">{s.y}</div>
-                  <div className="font-semibold text-white">{s.t}</div>
-                  <div className="text-sm text-slate-300 mt-2">{s.d}</div>
+                <div key={s.y} className="group relative rounded-2xl p-[2px] bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-500 shadow-sm">
+                  <div className="rounded-2xl p-5 bg-black h-full">
+                    <div className="text-xs tracking-wide text-slate-300">{s.y}</div>
+                    <div className="font-semibold text-white">{s.t}</div>
+                    <div className="text-sm text-slate-300 mt-2">{s.d}</div>
+                  </div>
                   {idx < 3 && (
                     <div className="hidden lg:block absolute top-1/2 -right-2 translate-x-1/2 -translate-y-1/2 w-8 h-1 bg-slate-600 rounded"></div>
                   )}
@@ -299,10 +457,12 @@ function App() {
                 { y: 'Year 3', t: 'AI & Product', d: 'ML/AI, Cloud, Product builds' },
                 { y: 'Year 4', t: 'Specialize & Ship', d: 'Electives, Capstone, Thesis' },
               ].map((s) => (
-                <div key={s.y} className="rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm">
-                  <div className="text-xs tracking-wide text-slate-300">{s.y}</div>
-                  <div className="font-semibold text-white">{s.t}</div>
-                  <div className="text-sm text-slate-300 mt-2">{s.d}</div>
+                <div key={s.y} className="rounded-2xl p-[2px] bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-500 shadow-sm">
+                  <div className="rounded-2xl p-5 bg-black">
+                    <div className="text-xs tracking-wide text-slate-300">{s.y}</div>
+                    <div className="font-semibold text-white">{s.t}</div>
+                    <div className="text-sm text-slate-300 mt-2">{s.d}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -311,35 +471,14 @@ function App() {
             <div className="mt-8 rounded-2xl border border-white/10 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-6 shadow">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                  <p className="text-xl font-bold">1.5 Years of Industrial Experience</p>
-                  <p className="text-white/90 text-sm">Embedded across Years 2–4 as paid/practical roles under mentor and faculty supervision.</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-sm">Stage 1: Assistant Developer (6 months)</span>
-                  <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-sm">Stage 2: Applied AI Engineer (6 months)</span>
-                  <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-sm">Stage 3: Product/Cloud Specialist (6 months)</span>
+                  <p className="text-xl font-bold">1.5 years Industrial work experience while pursuing B.Tech.</p>
+                  <p className="text-white/90 text-sm">Out of the 4 years of their B.Tech journey, students spend 18 months gaining real industry exposure through paid internships, live projects, and client assignments graduating not as freshers, but as experienced engineers with job-ready portfolios.</p>
                 </div>
               </div>
             </div>
 
-            {/* Sample term highlights */}
-            <div className="mt-8 grid md:grid-cols-3 gap-4">
-              {[
-                { h: 'Core CS', p: 'Programming, Data Structures, Algorithms, Discrete Math' },
-                { h: 'Systems & Data', p: 'OS, Networks, Databases, DevOps Fundamentals' },
-                { h: 'AI & Product', p: 'Machine Learning, Deep Learning, Cloud, Product Studios' },
-              ].map((b) => (
-                <div key={b.h} className="p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                  <p className="font-semibold text-white">{b.h}</p>
-                  <p className="text-sm text-slate-300 mt-1">{b.p}</p>
-                </div>
-              ))}
-            </div>
+            {/* Removed sample term highlights as requested */}
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a href="#register" className="btn-primary">See Detailed Syllabus & Apply</a>
-              <span className="text-sm text-slate-300">Includes mock tests, interview prep, and portfolio reviews.</span>
-            </div>
           </div>
         </div>
       </section>
@@ -565,7 +704,11 @@ function App() {
         .btn-hero-primary { @apply bg-white text-blue-900 font-semibold px-6 py-3 rounded-lg hover:bg-blue-50; }
         .btn-hero-secondary { @apply bg-transparent border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/10; }
         .badge { @apply inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700; }
-        .section-title { @apply text-2xl md:text-3xl font-bold; }
+        /* Section headings: bigger, bolder, with accent bar */
+        .section-title { font-weight: 800; font-size: clamp(1.875rem, 2.8vw + 1rem, 3rem); letter-spacing: -0.02em; line-height: 1.1; position: relative; display: inline-block; }
+        .section-title::after { content: ''; display: block; height: 4px; width: 72px; background: linear-gradient(90deg, #2563eb, #0ea5e9); border-radius: 9999px; margin: 10px auto 0; }
+        .logo-marquee { display: flex; width: max-content; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
       `}</style>
     </div>
   )
