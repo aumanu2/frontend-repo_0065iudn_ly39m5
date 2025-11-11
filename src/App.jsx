@@ -551,15 +551,15 @@ function App() {
                   ].map((s, i) => (
                     <div key={i} className="relative">
                       {/* node */}
-                      <div className="timeline-node animate-pop" aria-hidden="true">
+                      <div className="timeline-node animate-pop" style={{ animationDelay: `${i * 120}ms` }} aria-hidden="true">
                         <span className="timeline-node-ping" />
                         <span className="timeline-node-dot" />
                       </div>
                       {/* card */}
-                      <div className="timeline-card">
-                        <p className="text-xs uppercase tracking-wide text-blue-600 font-semibold">{s.date || 'Milestone'}</p>
-                        <p className="font-semibold text-gray-900 mt-1">{s.title}</p>
-                        <p className="text-sm text-gray-600 mt-2">{s.desc}</p>
+                      <div className="timeline-card animate-rise" style={{ animationDelay: `${i * 120 + 60}ms` }}>
+                        <p className="timeline-kicker">{s.date || 'Milestone'}</p>
+                        <p className="timeline-title">{s.title}</p>
+                        <p className="timeline-desc">{s.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -581,9 +581,9 @@ function App() {
                   <div key={i} className="relative mb-6 animate-fadeUp" style={{ animationDelay: `${i * 120}ms` }}>
                     <div className="absolute -left-0.5 top-1 h-3 w-3 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 shadow" />
                     <div className="rounded-xl bg-white border p-4 shadow-sm">
-                      <p className="text-[11px] uppercase tracking-wider text-blue-600 font-semibold">{s.date || 'Milestone'}</p>
-                      <p className="font-semibold text-gray-900 mt-0.5">{s.title}</p>
-                      <p className="text-sm text-gray-600 mt-1.5">{s.desc}</p>
+                      <p className="timeline-kicker">{s.date || 'Milestone'}</p>
+                      <p className="timeline-title">{s.title}</p>
+                      <p className="timeline-desc">{s.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -730,17 +730,26 @@ function App() {
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* Admissions timeline styles */
-        .timeline-line { position: absolute; top: 44px; left: 6%; right: 6%; height: 4px; background: linear-gradient(90deg, rgba(59,130,246,0.2), rgba(99,102,241,0.2)); border-radius: 9999px; }
-        .timeline-progress { position: absolute; top: 44px; left: 6%; height: 4px; width: 0%; background: linear-gradient(90deg, #3b82f6, #6366f1); border-radius: 9999px; animation: progressGrow 2.6s ease-out forwards; }
+        :root { --tl-blue:#2563eb; --tl-indigo:#4f46e5; --tl-sky:#0ea5e9; }
+        .timeline-line { position: absolute; top: 44px; left: 6%; right: 6%; height: 4px; background: linear-gradient(90deg, rgba(37,99,235,0.18), rgba(79,70,229,0.18)); border-radius: 9999px; }
+        .timeline-progress { position: absolute; top: 44px; left: 6%; height: 4px; width: 0%; background: linear-gradient(90deg, var(--tl-sky), var(--tl-blue), var(--tl-indigo)); border-radius: 9999px; box-shadow: 0 0 0 2px rgba(14,165,233,0.05), 0 6px 18px rgba(37,99,235,0.25); animation: progressGrow 3s cubic-bezier(.22,.61,.36,1) forwards; }
+        .timeline-progress::after { content:''; position:absolute; right:-8px; top:-4px; height:12px; width:12px; border-radius:9999px; background: radial-gradient(circle at center, #fff, rgba(255,255,255,0)); filter: blur(1px); animation: glow 1.8s ease-in-out infinite; }
         @keyframes progressGrow { to { width: 88%; } }
+        @keyframes glow { 0%,100%{ opacity:.7; } 50%{ opacity:1; } }
         .timeline-node { position: relative; height: 0; display: flex; justify-content: center; }
-        .timeline-node-dot { position: absolute; top: 34px; height: 16px; width: 16px; border-radius: 9999px; background: white; border: 4px solid #3b82f6; box-shadow: 0 6px 18px rgba(59,130,246,0.35); }
-        .timeline-node-ping { position: absolute; top: 30px; height: 24px; width: 24px; border-radius: 9999px; background: radial-gradient(circle at center, rgba(59,130,246,0.35), transparent 60%); animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-        @keyframes ping { 0% { transform: scale(0.9); opacity: 0.9; } 70% { transform: scale(1.3); opacity: 0.3; } 100% { transform: scale(1.5); opacity: 0; } }
-        .timeline-card { margin-top: 72px; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 16px; box-shadow: 0 8px 24px rgba(2,6,23,0.06); transition: transform .3s ease, box-shadow .3s ease; }
+        .timeline-node-dot { position: absolute; top: 34px; height: 16px; width: 16px; border-radius: 9999px; background: white; border: 4px solid var(--tl-blue); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+        .timeline-node-ping { position: absolute; top: 30px; height: 24px; width: 24px; border-radius: 9999px; background: radial-gradient(circle at center, rgba(99,102,241,0.35), transparent 60%); animation: ping 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+        @keyframes ping { 0% { transform: scale(0.9); opacity: 0.9; } 70% { transform: scale(1.25); opacity: 0.35; } 100% { transform: scale(1.5); opacity: 0; } }
+        .timeline-card { margin-top: 72px; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 16px; box-shadow: 0 8px 24px rgba(2,6,23,0.06); transition: transform .3s ease, box-shadow .3s ease; display:flex; flex-direction:column; justify-content:flex-start; min-height: 200px; }
+        @media (min-width: 1024px){ .timeline-card{ min-height: 220px; } }
         .timeline-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(2,6,23,0.12); }
+        .timeline-kicker{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#2563eb; font-weight:700; }
+        .timeline-title{ font-weight:700; color:#0f172a; margin-top:4px; }
+        .timeline-desc{ font-size:14px; color:#475569; margin-top:8px; }
         .animate-pop { animation: pop .5s ease-out both; }
-        @keyframes pop { 0% { transform: scale(.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes pop { 0% { transform: scale(.96); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .animate-rise { animation: rise .6s ease-out both; }
+        @keyframes rise { 0% { opacity:0; transform: translateY(8px); } 100% { opacity:1; transform: translateY(0); } }
         .animate-fadeUp { animation: fadeUp .6s ease-out both; }
         @keyframes fadeUp { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
       `}</style>
