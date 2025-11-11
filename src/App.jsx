@@ -518,62 +518,81 @@ function App() {
         </div>
       </section>
 
-      {/* Admissions – light */}
-      <section id="admissions" className="bg-gray-50">
+      {/* Admissions – redesigned to timeline */}
+      <section id="admissions" className="relative bg-gray-50">
+        {/* background accents */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute -top-10 -left-10 h-56 w-56 rounded-full bg-blue-200/40 blur-3xl" />
+          <div className="absolute -bottom-10 -right-10 h-56 w-56 rounded-full bg-indigo-200/40 blur-3xl" />
+        </div>
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <h2 className="section-title">Admissions: The Entrance Test</h2>
-          <p className="text-gray-600 mt-2">Test Name: <span className="font-semibold">AI-Tech Scholar Test</span></p>
-
-          <div className="mt-8 grid md:grid-cols-2 gap-8">
-            <div className="p-6 bg-white rounded-2xl border">
-              <h3 className="font-semibold text-lg">The Process</h3>
-              <ol className="mt-3 space-y-3 text-sm text-gray-700 list-decimal list-inside">
-                <li>Register online</li>
-                <li>Take Mock Tests (optional but encouraged). <a href="#mocks" className="text-blue-600 underline">Get mock resources</a></li>
-                <li>Appear for the main exam</li>
-                <li>All India Rank & Results — ranks inform final admission and scholarships</li>
-              </ol>
-              <a href="#register" className="mt-6 inline-block btn-primary">Register for the Entrance Test Now!</a>
-            </div>
-            <div className="p-6 bg-white rounded-2xl border">
-              <h3 className="font-semibold text-lg">Key Dates</h3>
-              <div className="mt-4 overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="text-left text-gray-500">
-                      <th className="py-2 pr-4">Event</th>
-                      <th className="py-2 pr-4">Date</th>
-                      <th className="py-2">Deadline</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-gray-800">
-                    {[
-                      ['Registration Opens', '1 Dec 2024', '31 Jan 2025'],
-                      ['Mock Test 1', '15 Jan 2025', '—'],
-                      ['Final Entrance Test', '10 Feb 2025', '5 Feb 2025'],
-                      ['Result Declaration', '20 Feb 2025', '—'],
-                      ['Counselling Begins', '25 Feb 2025', '—'],
-                    ].map(([e, d, dl]) => (
-                      <tr key={e} className="border-t">
-                        <td className="py-2 pr-4">{e}</td>
-                        <td className="py-2 pr-4">{d}</td>
-                        <td className="py-2">{dl}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div className="text-center">
+            <h2 className="section-title">Admission Process</h2>
+            <p className="text-gray-600 mt-2 max-w-2xl mx-auto">Follow these steps to secure your seat. The process blends clarity with speed—built for motivated learners.</p>
           </div>
 
-          {/* FAQs */}
-          <div className="mt-12 max-w-3xl">
-            <h3 className="font-semibold text-lg">Frequently Asked Questions</h3>
-            <div className="mt-2 rounded-xl bg-white border">
-              <FAQItem q="Is the degree recognized?" a="Yes. It's a university-affiliated B.Tech program with all standard regulations and policies." />
-              <FAQItem q="Do you offer scholarships?" a="Yes. Merit-based scholarships are tied to your All India Rank in the entrance test." />
-              <FAQItem q="How do internships work?" a="Industry experience is embedded across Years 2–4 in three 6‑month stages under faculty and mentor supervision." />
-              <FAQItem q="Will I get placement support?" a="Yes. We offer mock interviews, resume reviews, referrals, and a portfolio-first placement strategy." />
+          {/* Timeline */}
+          <div className="mt-12">
+            {/* desktop horizontal timeline */}
+            <div className="hidden md:block">
+              <div className="relative">
+                {/* base line */}
+                <div className="timeline-line" />
+                {/* animated progress */}
+                <div className="timeline-progress" />
+
+                <div className="grid grid-cols-5 gap-6">
+                  {[
+                    { title: 'Step 1 • Check your Eligibility', desc: 'Students who cleared 12th class Examination by July, 2026 from recognised boards', date: '' },
+                    { title: 'Step 2 • Submit your Application', desc: 'Fill up the form by 10th Dec, 2025 and appear for AlgoUniversity Tech Scholar Test', date: '10 Dec, 2025' },
+                    { title: 'Step 3 • Take the Test', desc: 'Solve 60 questions in 120 minutes, covering syllabus of PCM & logical reasoning', date: '14 Dec, 2025' },
+                    { title: 'Step 4 • Interview Call', desc: 'Get ready with your 1:1 interview with industry leaders and wait for the results.', date: '' },
+                    { title: 'Step 5 • Admission Result', desc: 'Admission Result Announced', date: '21 Dec' },
+                  ].map((s, i) => (
+                    <div key={i} className="relative">
+                      {/* node */}
+                      <div className="timeline-node animate-pop" aria-hidden="true">
+                        <span className="timeline-node-ping" />
+                        <span className="timeline-node-dot" />
+                      </div>
+                      {/* card */}
+                      <div className="timeline-card">
+                        <p className="text-xs uppercase tracking-wide text-blue-600 font-semibold">{s.date || 'Milestone'}</p>
+                        <p className="font-semibold text-gray-900 mt-1">{s.title}</p>
+                        <p className="text-sm text-gray-600 mt-2">{s.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* mobile vertical timeline */}
+            <div className="md:hidden">
+              <div className="relative pl-6">
+                <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 via-blue-300 to-indigo-300" />
+                {[
+                  { title: 'Step 1 • Check your Eligibility', desc: 'Students who cleared 12th class Examination by July, 2026 from recognised boards', date: '' },
+                  { title: 'Step 2 • Submit your Application', desc: 'Fill up the form by 10th Dec, 2025 and appear for AlgoUniversity Tech Scholar Test', date: '10 Dec, 2025' },
+                  { title: 'Step 3 • Take the Test (14th Dec, 2025)', desc: 'Solve 60 questions in 120 minutes, covering syllabus of PCM & logical reasoning', date: '14 Dec, 2025' },
+                  { title: 'Step 4 • Interview Call', desc: 'Get ready with your 1:1 interview with industry leaders and wait for the results.', date: '' },
+                  { title: 'Step 5 • Admission Result (21st Dec)', desc: 'Admission Result Announced', date: '21 Dec' },
+                ].map((s, i) => (
+                  <div key={i} className="relative mb-6 animate-fadeUp" style={{ animationDelay: `${i * 120}ms` }}>
+                    <div className="absolute -left-0.5 top-1 h-3 w-3 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 shadow" />
+                    <div className="rounded-xl bg-white border p-4 shadow-sm">
+                      <p className="text-[11px] uppercase tracking-wider text-blue-600 font-semibold">{s.date || 'Milestone'}</p>
+                      <p className="font-semibold text-gray-900 mt-0.5">{s.title}</p>
+                      <p className="text-sm text-gray-600 mt-1.5">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 flex items-center justify-center gap-3">
+              <a href="#register" className="btn-primary">Apply Now</a>
+              <span className="text-sm text-gray-600">Takes less than 5 minutes. You can edit details later.</span>
             </div>
           </div>
         </div>
@@ -709,6 +728,21 @@ function App() {
         .section-title::after { content: ''; display: block; height: 4px; width: 72px; background: linear-gradient(90deg, #2563eb, #0ea5e9); border-radius: 9999px; margin: 10px auto 0; }
         .logo-marquee { display: flex; width: max-content; animation: marquee 25s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Admissions timeline styles */
+        .timeline-line { position: absolute; top: 44px; left: 6%; right: 6%; height: 4px; background: linear-gradient(90deg, rgba(59,130,246,0.2), rgba(99,102,241,0.2)); border-radius: 9999px; }
+        .timeline-progress { position: absolute; top: 44px; left: 6%; height: 4px; width: 0%; background: linear-gradient(90deg, #3b82f6, #6366f1); border-radius: 9999px; animation: progressGrow 2.6s ease-out forwards; }
+        @keyframes progressGrow { to { width: 88%; } }
+        .timeline-node { position: relative; height: 0; display: flex; justify-content: center; }
+        .timeline-node-dot { position: absolute; top: 34px; height: 16px; width: 16px; border-radius: 9999px; background: white; border: 4px solid #3b82f6; box-shadow: 0 6px 18px rgba(59,130,246,0.35); }
+        .timeline-node-ping { position: absolute; top: 30px; height: 24px; width: 24px; border-radius: 9999px; background: radial-gradient(circle at center, rgba(59,130,246,0.35), transparent 60%); animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        @keyframes ping { 0% { transform: scale(0.9); opacity: 0.9; } 70% { transform: scale(1.3); opacity: 0.3; } 100% { transform: scale(1.5); opacity: 0; } }
+        .timeline-card { margin-top: 72px; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 16px; box-shadow: 0 8px 24px rgba(2,6,23,0.06); transition: transform .3s ease, box-shadow .3s ease; }
+        .timeline-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(2,6,23,0.12); }
+        .animate-pop { animation: pop .5s ease-out both; }
+        @keyframes pop { 0% { transform: scale(.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .animate-fadeUp { animation: fadeUp .6s ease-out both; }
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
       `}</style>
     </div>
   )
