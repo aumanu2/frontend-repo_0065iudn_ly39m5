@@ -132,14 +132,14 @@ function App() {
   const stepIcons = [
     // 1. Eligibility (Shield Check)
     (
-      <svg viewBox="0 0 24 24" className="h-12 w-12 text-blue-600/20" fill="currentColor" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-14 w-14 text-blue-600/35" fill="currentColor" aria-hidden>
         <path d="M12 2l7 3v6c0 5-3.5 9.5-7 11-3.5-1.5-7-6-7-11V5l7-3z"/>
         <path d="M10 12l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     // 2. Application (Document)
     (
-      <svg viewBox="0 0 24 24" className="h-12 w-12 text-sky-600/20" fill="currentColor" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-14 w-14 text-sky-600/35" fill="currentColor" aria-hidden>
         <path d="M6 2h8l4 4v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
         <path d="M14 2v4h4" fill="white" fillOpacity=".2"/>
         <path d="M8 10h8M8 14h8M8 18h6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
@@ -147,7 +147,7 @@ function App() {
     ),
     // 3. Test (Clipboard/Check)
     (
-      <svg viewBox="0 0 24 24" className="h-12 w-12 text-indigo-600/20" fill="currentColor" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-14 w-14 text-indigo-600/35" fill="currentColor" aria-hidden>
         <path d="M9 2h6a2 2 0 0 1 2 2h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1a2 2 0 0 1 2-2z"/>
         <rect x="8" y="2" width="8" height="4" rx="1" fill="white" fillOpacity=".2"/>
         <path d="M8 10h8M8 14h5M9 18l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
@@ -155,14 +155,14 @@ function App() {
     ),
     // 4. Interview (Chat Bubble)
     (
-      <svg viewBox="0 0 24 24" className="h-12 w-12 text-blue-700/20" fill="currentColor" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-14 w-14 text-blue-700/35" fill="currentColor" aria-hidden>
         <path d="M4 4h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
         <path d="M7 9h10M7 12h7" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
       </svg>
     ),
     // 5. Result (Trophy)
     (
-      <svg viewBox="0 0 24 24" className="h-12 w-12 text-amber-600/25" fill="currentColor" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-14 w-14 text-amber-600/40" fill="currentColor" aria-hidden>
         <path d="M8 4h8a3 3 0 0 1 3 3v1h1a2 2 0 0 1 0 4h-1a6 6 0 0 1-6 5 6 6 0 0 1-6-5H6a4 4 0 0 1-4-4V7h2V6a2 2 0 0 1 2-2z"/>
         <path d="M9 20h6v2H9z"/>
       </svg>
@@ -596,6 +596,14 @@ function App() {
                         <span className="timeline-node-ping" />
                         <span className="timeline-node-dot" />
                       </div>
+                      {/* connector from node to card */}
+                      <div className="timeline-connector" aria-hidden="true" />
+                      {/* mini checkpoint strip above card */}
+                      <div className="checkpoint-strip" aria-hidden="true">
+                        {[0,1,2,3,4].map((d) => (
+                          <span key={d} className={`checkpoint-dot ${d === i ? 'active' : ''}`} />
+                        ))}
+                      </div>
                       {/* card with gradient border wrap */}
                       <div className="timeline-card-wrap animate-rise" style={{ animationDelay: `${i * 120 + 60}ms` }}>
                         <div className="timeline-card">
@@ -625,6 +633,12 @@ function App() {
                 ].map((s, i) => (
                   <div key={i} className="relative mb-6 animate-fadeUp" style={{ animationDelay: `${i * 120}ms` }}>
                     <div className="absolute -left-0.5 top-1 h-3 w-3 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 shadow" />
+                    {/* mini checkpoint strip above card */}
+                    <div className="ml-4 mb-2 flex items-center gap-1.5">
+                      {[0,1,2,3,4].map((d) => (
+                        <span key={d} className={`checkpoint-dot ${d === i ? 'active' : ''}`} />
+                      ))}
+                    </div>
                     <div className="timeline-card-wrap">
                       <div className="timeline-card">
                         <p className="timeline-kicker">{s.date || 'Milestone'}</p>
@@ -785,9 +799,15 @@ function App() {
         @keyframes progressGrow { to { width: 88%; } }
         @keyframes glow { 0%,100%{ opacity:.7; } 50%{ opacity:1; } }
         .timeline-node { position: relative; height: 0; display: flex; justify-content: center; }
-        .timeline-node-dot { position: absolute; top: 34px; height: 16px; width: 16px; border-radius: 9999px; background: white; border: 4px solid var(--tl-blue); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        .timeline-node-ping { position: absolute; top: 30px; height: 24px; width: 24px; border-radius: 9999px; background: radial-gradient(circle at center, rgba(99,102,241,0.35), transparent 60%); animation: ping 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+        .timeline-node-dot { position: absolute; top: 32px; height: 18px; width: 18px; border-radius: 9999px; background: white; border: 5px solid var(--tl-blue); box-shadow: 0 8px 22px rgba(37,99,235,0.4); }
+        .timeline-node-ping { position: absolute; top: 28px; height: 26px; width: 26px; border-radius: 9999px; background: radial-gradient(circle at center, rgba(99,102,241,0.35), transparent 60%); animation: ping 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
         @keyframes ping { 0% { transform: scale(0.9); opacity: 0.9; } 70% { transform: scale(1.25); opacity: 0.35; } 100% { transform: scale(1.5); opacity: 0; } }
+        /* vertical connector from node to card */
+        .timeline-connector { position: absolute; left: 50%; transform: translateX(-50%); top: 52px; width: 2px; height: 26px; background: linear-gradient(180deg, var(--tl-blue), var(--tl-indigo)); opacity: 0.6; }
+        /* mini checkpoint strip above card */
+        .checkpoint-strip { margin: 84px auto 10px; display: flex; justify-content: center; gap: 6px; }
+        .checkpoint-dot { height: 8px; width: 8px; border-radius: 9999px; background: #c7d2fe; opacity: .55; box-shadow: inset 0 0 0 1px rgba(79,70,229,0.35); }
+        .checkpoint-dot.active { background: linear-gradient(135deg, var(--tl-sky), var(--tl-blue)); opacity: 1; box-shadow: 0 0 0 2px rgba(59,130,246,0.2); }
         /* Gradient border wrapper similar to curriculum */
         .timeline-card-wrap { padding: 2px; border-radius: 16px; background: linear-gradient(135deg, var(--tl-sky), var(--tl-blue), var(--tl-indigo)); box-shadow: 0 2px 12px rgba(2,6,23,0.06); }
         .timeline-card { position: relative; background: white; border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 16px; box-shadow: 0 8px 24px rgba(2,6,23,0.06); transition: transform .3s ease, box-shadow .3s ease; display:flex; flex-direction:column; justify-content:flex-start; min-height: 200px; }
@@ -796,7 +816,7 @@ function App() {
         .timeline-kicker{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#2563eb; font-weight:700; }
         .timeline-title{ font-weight:700; color:#0f172a; margin-top:4px; }
         .timeline-desc{ font-size:14px; color:#475569; margin-top:8px; text-align: justify; text-justify: inter-word; }
-        .timeline-watermark { position: absolute; right: 10px; bottom: 10px; opacity: .18; pointer-events: none; }
+        .timeline-watermark { position: absolute; right: 10px; bottom: 10px; opacity: .32; pointer-events: none; }
         .animate-pop { animation: pop .5s ease-out both; }
         @keyframes pop { 0% { transform: scale(.96); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         .animate-rise { animation: rise .6s ease-out both; }
