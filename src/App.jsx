@@ -628,7 +628,7 @@ function App() {
         .metal-wrap { position: relative; border-radius: 20px; padding: 2px; background: linear-gradient(135deg, rgba(14,165,233,0.65), rgba(37,99,235,0.8), rgba(79,70,229,0.8)); box-shadow: 0 20px 60px rgba(2,6,23,0.45), inset 0 0 0 1px rgba(255,255,255,0.08); }
         .metal-card { position: relative; border-radius: 18px; background: linear-gradient(160deg, rgba(15,23,42,0.96), rgba(2,6,23,0.98)); padding: 28px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
         .metal-card::before { content: ''; position: absolute; inset: -1px; background: radial-gradient(800px 300px at -10% -20%, rgba(59,130,246,0.18), transparent 60%), radial-gradient(600px 300px at 120% 0%, rgba(14,165,233,0.18), transparent 60%); pointer-events: none; }
-        .metal-sheen { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.06) 40%, transparent 60%); mix-blend-mode: screen; animation: sheen 6s linear infinite; border-radius: 18px; }
+        .metal-sheen { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.06) 40%, transparent 60%); mix-blend-mode: screen; animation: sheen 6s linear infinite; border-radius: 18px; pointer-events: none; }
         @keyframes sheen { 0% { transform: translateX(-30%); } 100% { transform: translateX(30%); } }
       `}</style>
     </div>
