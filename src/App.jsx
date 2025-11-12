@@ -10,6 +10,7 @@ function FAQItem({ q, a }) {
         onClick={() => setOpen(!open)}
         className="w-full flex justify-between items-center py-4 text-left"
         aria-expanded={open}
+        type="button"
       >
         <span className="font-medium text-gray-900 dark:text-gray-100">{q}</span>
         <span className={`transform transition ${open ? 'rotate-180' : ''}`}>▾</span>
@@ -45,6 +46,7 @@ function App() {
 
   const submit = async (e) => {
     e.preventDefault()
+    if (loading) return
     setLoading(true)
     setError('')
     setSubmitted(null)
@@ -54,28 +56,37 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      if (!res.ok) throw new Error('Submission failed')
+      if (!res.ok) {
+        const t = await res.text()
+        throw new Error(t || 'Submission failed')
+      }
       const data = await res.json()
-      setSubmitted(data.id)
-      setForm({
-        full_name: '',
-        email: '',
-        phone: '',
-        parent_name: '',
-        city: '',
-        state: '',
-        grade_level: '11',
-        stream: 'PCM',
-        program_interest: '',
-        preferred_intake: '2025-26',
-        how_heard: '',
-        consent: false,
-      })
+      setSubmitted(data.id || 'CONFIRMED')
+      // keep form values for display under overlay; reset after user closes
     } catch (err) {
       setError(err.message || 'Something went wrong')
     } finally {
       setLoading(false)
     }
+  }
+
+  const resetForm = () => {
+    setForm({
+      full_name: '',
+      email: '',
+      phone: '',
+      parent_name: '',
+      city: '',
+      state: '',
+      grade_level: '11',
+      stream: 'PCM',
+      program_interest: '',
+      preferred_intake: '2025-26',
+      how_heard: '',
+      consent: false,
+    })
+    setSubmitted(null)
+    setError('')
   }
 
   // Company logos for marquee section (between Hero and Achievers Track)
@@ -503,8 +514,27 @@ function App() {
                 </div>
 
                 {/* Right: Form */}
-                <div className="bg-white/95 rounded-xl border border-white/30 shadow-lg p-6">
-                  <form onSubmit={submit} className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white/95 rounded-xl border border-white/30 shadow-lg p-6 relative overflow-hidden">
+                  {/* Success Overlay */}
+                  {submitted && (
+                    <div className="absolute inset-0 z-10 bg-white/95 backdrop-blur-sm flex items-center justify-center p-6">
+                      <div className="max-w-md text-center">
+                        <div className="mx-auto h-14 w-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+                          <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                        </div>
+                        <h4 className="text-xl font-bold text-emerald-700">Thank you for registering!</h4>
+                        <p className="mt-2 text-gray-700">Your registration ID:</p>
+                        <p className="mt-1 font-mono text-sm bg-gray-100 inline-block px-2 py-1 rounded border">{submitted}</p>
+                        <p className="mt-3 text-gray-600">We’ve sent a confirmation email with mock test access.</p>
+                        <div className="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
+                          <a href="#program" className="btn-primary inline-flex items-center justify-center">Explore Program</a>
+                          <button type="button" onClick={resetForm} className="px-5 py-3 rounded-lg border font-semibold text-gray-700 hover:bg-gray-50">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <form onSubmit={submit} className={`grid md:grid-cols-2 gap-4 ${submitted ? 'pointer-events-none select-none opacity-60' : ''}`} aria-live="polite">
                     <input className="input" name="full_name" placeholder="Student Full Name" value={form.full_name} onChange={handleChange} required />
                     <input className="input" name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
                     <input className="input" name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} required />
@@ -542,11 +572,10 @@ function App() {
                     </label>
 
                     <div className="md:col-span-2 flex items-center gap-3">
-                      <button disabled={loading} className="btn-primary">
+                      <button type="submit" disabled={loading} className="btn-primary inline-flex items-center justify-center w-full sm:w-auto">
                         {loading ? 'Submitting...' : 'Register Now'}
                       </button>
-                      {submitted && <span className="text-green-500">Thank you! Your registration ID: {submitted}</span>}
-                      {error && <span className="text-red-500">{error}</span>}
+                      {error && <span className="text-red-500" role="alert">{error}</span>}
                     </div>
                   </form>
                 </div>
